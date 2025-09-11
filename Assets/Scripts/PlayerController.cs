@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public Transform bulletSpawn;
     public float fireCooldown = 0.25f;
     private float _cooldownTimer;
+    
+    public int lives = 5;
 
     void Awake()
     {
@@ -55,5 +57,25 @@ public class PlayerController : MonoBehaviour
         var bullet = bulletPool.Get(bulletSpawn.position, Quaternion.identity);
         var proj = bullet.GetComponent<Projectile>();
         proj.Init(Vector2.up, 12f, gameObject, bulletPool);
+    }
+
+    public void Damage()
+    {
+        lives--;
+        if (lives <= 0)
+        {
+            // Game Over
+            // Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")
+            || other.gameObject.layer == LayerMask.NameToLayer("Projectile"))
+        {
+            Damage();
+        }
     }
 }

@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
   prefab: {fileID: 601727063}
-  initialSize: 16
+  initialSize: 3
 --- !u!4 &925567378
 Transform:
   m_ObjectHideFlags: 0
@@ -476,6 +476,7 @@ MonoBehaviour:
   bulletPool: {fileID: 925567377}
   bulletSpawn: {fileID: 1088718632}
   fireCooldown: 0.25
+  lives: 5
 --- !u!4 &1088718632 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1786689785057971166, guid: 5e786928d8e3241099199d9c5f496349, type: 3}

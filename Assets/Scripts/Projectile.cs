@@ -31,22 +31,22 @@ public class Projectile : MonoBehaviour
         if (other.gameObject == _owner) return; // ignora al que disparó
 
         // Daño a enemigos, jugador o escudos
-        // if (other.TryGetComponent(out Enemy enemy))
-        // {
-        //     enemy.Kill();
-        //     _returnPool.Return(gameObject);
-        // }
-        // else if (other.TryGetComponent(out PlayerController player))
-        // {
-        //     player.Damage();
-        //     _returnPool.Return(gameObject);
-        // }
-        // else if (other.gameObject.layer == LayerMask.NameToLayer("Shield"))
-        // {
-        //     // Escudo se daña/destroza
-        //     var shield = other.GetComponent<ShieldChunk>();
-        //     if (shield != null) shield.Damage(1);
-        //     _returnPool.Return(gameObject);
-        // }
+        if (other.TryGetComponent(out Enemy enemy))
+        {
+            enemy.Kill();
+            _returnPool.Return(gameObject);
+        }
+        else if (other.TryGetComponent(out PlayerController player))
+        {
+            player.Damage();
+            _returnPool.Return(gameObject);
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Shield"))
+        {
+            // Escudo se daña/destroza
+            var shield = other.GetComponent<ShieldChunk>();
+            if (shield != null) shield.Damage(1);
+            _returnPool.Return(gameObject);
+        }
     }
 }
