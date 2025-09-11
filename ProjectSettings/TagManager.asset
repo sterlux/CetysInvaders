@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - Enemy
+  - Projectile
+  - Shield
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3850905967
+    locked: 0
+  - name: Shield
+    uniqueID: 2836137069
+    locked: 0
+  - name: Enemy
+    uniqueID: 3560710015
+    locked: 0
+  - name: Player
+    uniqueID: 1348920261
+    locked: 0
+  - name: UI
+    uniqueID: 3131123509
+    locked: 0
+  m_RenderingLayers:
+  - Default

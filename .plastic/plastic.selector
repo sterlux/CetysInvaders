@@ -1,0 +1,4 @@
+repository "CetysInvaders 2025-09-03_18-06-49/CetysInvaders@4673842674071@cloud"
+  path "/"
+    br "/main"
+    co "/main"
