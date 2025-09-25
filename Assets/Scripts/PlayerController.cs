@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public Transform bulletSpawn;
     public float fireCooldown = 0.25f;
     private float _cooldownTimer;
+
+    public System.Action OnPlayerHit;
     
     public int lives = 5;
 
@@ -53,8 +55,8 @@ public class PlayerController : MonoBehaviour
     {
         // if (_cooldownTimer > 0f || bulletPool == null || bulletSpawn == null) return;
         // _cooldownTimer = fireCooldown;
-
-        var bullet = bulletPool.Get(bulletSpawn.position, Quaternion.identity);
+        var spawnPos = bulletSpawn != null ? bulletSpawn.position + Vector3.up * 1.2f: transform.position + Vector3.up * 1.2f;
+        var bullet = bulletPool.Get(spawnPos, Quaternion.identity);
         var proj = bullet.GetComponent<Projectile>();
         proj.Init(Vector2.up, 12f, gameObject, bulletPool);
     }

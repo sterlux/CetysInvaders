@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4696920787949130503}
   - component: {fileID: 433986133404722747}
   - component: {fileID: 2647759415221107027}
+  - component: {fileID: 4236847681084434544}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -54,6 +55,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -75,6 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -162,3 +166,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.867886}
   m_EdgeRadius: 0
+--- !u!114 &4236847681084434544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248647941113561328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2e861e256dd4aca92154fc377c1b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  speed: 14
+  clampX: 11
+  bulletPool: {fileID: 0}
+  bulletSpawn: {fileID: 0}
+  fireCooldown: 0.25
+  lives: 5

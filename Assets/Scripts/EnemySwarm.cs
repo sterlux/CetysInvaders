@@ -8,7 +8,7 @@ public class EnemySwarm : MonoBehaviour
     public int rows = 5;
     public int columns = 11;
     public float horizontalSpacing = 1.2f;
-    public float verticalSpacing = 0.9f;
+    public float verticalSpacing = 1.2f;
     public Vector2 startOffset = new(-6f, 3.5f);
     
     [Header("Movement Settings")]
@@ -22,13 +22,19 @@ public class EnemySwarm : MonoBehaviour
     public float shootIntervalMax = 3.5f;
     public float enemyBulletSpeed = 8f;
     
-    private List<Enemy> _enemies = new();
+    public List<Enemy> _enemies = new();
     private int _direction = 1; // 1 = right, -1 = left
     private float _shootTimer;
     
     public System.Action OnSwarmReachedBottom; // Evento para notificar cuando el enjambre llega al fondo
     public System.Action<int> OnEnemyKilled; // Evento para notificar cuando un enemigo es eliminado, con el valor de puntaje
 
+    void Start()
+    {
+        SpawnGrid();
+        ResetShotTimer();
+    }
+    
     void Update()
     {
         if (_enemies.Count == 0) return;
@@ -75,7 +81,39 @@ public class EnemySwarm : MonoBehaviour
             ShootFromRandomBottomEnemy();
             ResetShotTimer();
         }
+        
+        float t = Mathf.InverseLerp(columns * rows, 1, _enemies.Count);
+        speed = Mathf.Lerp(1f, 5f, t);
+    }
+
+    private void SpawnGrid()
+    {
+        _enemies.Clear();
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < columns; c++)
+            {
+                Vector3 local = new (startOffset.x + c * horizontalSpacing, startOffset.y + r * verticalSpacing, 0f);
+                var enemyGO = Instantiate(enemyPrefab, transform.position + local, Quaternion.identity, transform);
+                var enemy = enemyGO.GetComponent<Enemy>();
+                if(enemy is not null)
+                {
+                    enemy.OnKilled += OnEnemyKilledHandler; 
+                    _enemies.Add(enemy);
+                }
+            }
+        }
     }
     
+    private void OnEnemyKilledHandler(Enemy enemy)
+    {
+        OnEnemyKilled?.Invoke(enemy.scoreValue);
+        _enemies.Remove(enemy);
+    }
+
+    private void ResetShotTimer()
+    {
+        _shootTimer = Random.Range(shootIntervalMin, shootIntervalMax);
+    }
     
 }

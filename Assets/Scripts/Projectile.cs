@@ -28,21 +28,29 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == _owner) return; // ignora al que disparó
+        if (other.gameObject == _owner)
+        {
+            Debug.Log("nothing hit");
+            return; // ignora al que disparó
+        }
 
         // Daño a enemigos, jugador o escudos
-        if (other.TryGetComponent(out Enemy enemy))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
+            var enemy = other.GetComponentInParent<Enemy>();
+            Debug.Log("hit enemy");
             enemy.Kill();
             _returnPool.Return(gameObject);
         }
-        else if (other.TryGetComponent(out PlayerController player))
+        else if (other.gameObject.TryGetComponent(out PlayerController player))
         {
+            Debug.Log("hit player");
             player.Damage();
             _returnPool.Return(gameObject);
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Shield"))
         {
+            Debug.Log("hit shield");
             // Escudo se daña/destroza
             var shield = other.GetComponent<ShieldChunk>();
             if (shield != null) shield.Damage(1);
